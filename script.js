@@ -144,8 +144,8 @@ function showWeek (arr) {
 btnCalcAndShow.addEventListener('click', initWeek);
 
 function startInit () {
-	arrSubjs = JSON.parse( sessionStorage.arrSubjs);
-	week = JSON.parse( sessionStorage.week);
+	arrSubjs = JSON.parse( localStorage.arrSubjs);
+	week = JSON.parse( localStorage.week);
 	showWeek (week);
 }
 
