@@ -35,7 +35,6 @@ function addSubjs (event) {
 
 btnAdd.addEventListener('click', addSubjs);
 
-
 function showSubjs () {
 	let li = document.createElement('li');
 	let nameSubj = nameSubject.value;
@@ -43,12 +42,6 @@ function showSubjs () {
 	li.innerHTML = nameSubj + ' делаем ' + timeSubj + ' часов';
 	showAdds.append(li);
 }
-
-function teest () {
-	elem.remove();
-}
-
-
 
 let btnCalcAndShow = document.querySelector('.btn_calc_and_show');
 
@@ -62,6 +55,7 @@ function initWeek () {
 	if (isSubjsShow == false) {
 		countWeek ();
 		showWeek (week);
+		locStor ();
 	};
 	
 }
@@ -148,16 +142,22 @@ function showWeek (arr) {
 }
 
 btnCalcAndShow.addEventListener('click', initWeek);
-initWeek ();
+
+function startInit () {
+	arrSubjs = JSON.parse( sessionStorage.arrSubjs);
+	week = JSON.parse( sessionStorage.week);
+	showWeek (week);
+}
 
 function locStor () {
-	localStorage.setItem('test', 1);
-	alert( localStorage.getItem('test') );
-	//localStorage.setItem ('arrSubjs', JSON.stringify (arrSubjs) );
+	//localStorage.setItem('test', 1);
+	//alert( localStorage.getItem('test') );
+	localStorage.setItem ('arrSubjs', JSON.stringify (arrSubjs) );
+	localStorage.setItem ('week', JSON.stringify (week) );
 	
 }
 
-
+startInit ();
 
 /*Что нужно:
 В конец добавил выполнение initWeek, чтобы при загрузке уже отобразилась неделя
