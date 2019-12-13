@@ -185,20 +185,24 @@ function cleanTable (e) {
 	e.preventDefault();
 	table.innerHTML = '<thead> <tr> <th scope="col" class="bg-secondary">#</th> <th scope="col" colspan="2" class="bg-success">Понедельник</th> <th scope="col" colspan="2" class="bg-success">Вторник</th> <th scope="col" colspan="2" class="bg-success">Среда</th> <th scope="col" colspan="2" class="bg-success">Четверг</th> <th scope="col" colspan="2" class="bg-success">Пятница</th> <th scope="col" colspan="2" class="bg-danger">Суббота</th> <th scope="col" colspan="2" class="bg-danger">Воскресенье</th> </tr> </thead> <tbody> <tr> <th scope="row" class="table-secondary"></th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-danger">Предмет</th> <th class="table-danger">Время</th> <th class="table-danger">Предмет</th> <th class="table-danger">Время</th> </tr>';
 	isSubjsShow = false, week = [[]];
+	showAdds.innerHTML = '';
+	arrSubjs = [];
+	localStorage.clear();
 }
 
+/*
 function cleanSubjs (e) {
 	e.preventDefault();
 	showAdds.innerHTML = '';
 }
 
 btnCleanSubjs.addEventListener('click', cleanSubjs);
+*/
 
 btnCleanTable.addEventListener('click', cleanTable);
 
 startInit ();
 
-//new comment
 
 /*Что нужно:
 В конец добавил выполнение initWeek, чтобы при загрузке уже отобразилась неделя
