@@ -19,6 +19,8 @@ let table = document.querySelector('.table-sm');
 
 let btnCleanTable = document.querySelector('.clean-table');
 
+let btnCleanSubjs = document.querySelector('.clean-subjs');
+
 
 function addSubjs (event) {
 	event.preventDefault();
@@ -26,24 +28,41 @@ function addSubjs (event) {
 	else if ( !(!isNaN(parseFloat(timeSubject.value)) && isFinite(timeSubject.value))) alert ('Время должно быть в цифрах');
 	else {
 		arrSubjs.push ([nameSubject.value, timeSubject.value]);
-		showSubjs ();
+		showSubjs (2);
 		nameSubject.value = '';
 		timeSubject.value = '';
-		
-		
-		
 		
 	}
 }
 
 btnAdd.addEventListener('click', addSubjs);
 
-function showSubjs () {
-	let li = document.createElement('li');
+function showSubjs (arg) {
+	/*let li = document.createElement('li');
 	let nameSubj = nameSubject.value;
 	let timeSubj = timeSubject.value;
 	li.innerHTML = nameSubj + ' делаем ' + timeSubj + ' часов';
-	showAdds.append(li);
+	showAdds.append(li);*/
+	
+	let check = arg;
+	// if check 1 => start work, else check = 2 => add new subj
+
+	if (check == 1) {
+		for (let i=0; i<=arrSubjs.length-1; i++) {
+			let li = document.createElement('li');
+			li.innerHTML = arrSubjs[i][0] + ' - ' + arrSubjs[i][1] + ' раз в неделю';
+			console.log(arrSubjs[i]);
+			showAdds.append(li);
+		}
+	}
+	
+	if (check == 2) {
+		let li = document.createElement('li');
+		li.innerHTML = nameSubject.value + ' делаем ' + timeSubject.value  + ' раз в неделю';
+		showAdds.append(li);
+	}
+	
+	
 }
 
 let btnCalcAndShow = document.querySelector('.btn_calc_and_show');
@@ -149,7 +168,9 @@ btnCalcAndShow.addEventListener('click', initWeek);
 function startInit () {
 	arrSubjs = JSON.parse( localStorage.arrSubjs);
 	week = JSON.parse( localStorage.week);
+	showSubjs (1);
 	showWeek (week);
+	
 }
 
 function locStor () {
@@ -165,6 +186,13 @@ function cleanTable (e) {
 	table.innerHTML = '<thead> <tr> <th scope="col" class="bg-secondary">#</th> <th scope="col" colspan="2" class="bg-success">Понедельник</th> <th scope="col" colspan="2" class="bg-success">Вторник</th> <th scope="col" colspan="2" class="bg-success">Среда</th> <th scope="col" colspan="2" class="bg-success">Четверг</th> <th scope="col" colspan="2" class="bg-success">Пятница</th> <th scope="col" colspan="2" class="bg-danger">Суббота</th> <th scope="col" colspan="2" class="bg-danger">Воскресенье</th> </tr> </thead> <tbody> <tr> <th scope="row" class="table-secondary"></th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-success">Предмет</th> <th class="table-success">Время</th> <th class="table-danger">Предмет</th> <th class="table-danger">Время</th> <th class="table-danger">Предмет</th> <th class="table-danger">Время</th> </tr>';
 	isSubjsShow = false, week = [[]];
 }
+
+function cleanSubjs (e) {
+	e.preventDefault();
+	showAdds.innerHTML = '';
+}
+
+btnCleanSubjs.addEventListener('click', cleanSubjs);
 
 btnCleanTable.addEventListener('click', cleanTable);
 
