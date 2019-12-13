@@ -198,6 +198,8 @@ btnCleanTable.addEventListener('click', cleanTable);
 
 startInit ();
 
+//new comment
+
 /*Что нужно:
 В конец добавил выполнение initWeek, чтобы при загрузке уже отобразилась неделя
 1. Но каждый раз перезагружая, обновляется таблица. 
