@@ -5,10 +5,13 @@ let nameSubject = document.getElementById('name_subject');
 
 let timeSubject = document.getElementById('time_subject');
 
-let arrSubjs = [['Биология', 2],['Зрение', 7],['Русский', 4],['Английский', 7], ['Матан', 3]];
+let arrSubjs = [];
 //['Английский', 5], ['Матан', 3]]; ['a', 7], ['b',7], ['c', 7]
 //['Биология', 2],['Зрение', 7],['Русский', 4],['Английский', 7], ['Матан', 3]
 let showAdds = document.querySelector('.show_adds');
+
+let nameListSubjs = document.querySelector('.name-list-subjs');
+let positionNameListSubjs = 'on';
 
 //Проверка - есть ли уже рассчитанные данные
 let isSubjsShow = false;
@@ -51,7 +54,6 @@ function showSubjs (arg) {
 		for (let i=0; i<=arrSubjs.length-1; i++) {
 			let li = document.createElement('li');
 			li.innerHTML = arrSubjs[i][0] + ' - ' + arrSubjs[i][1] + ' раз в неделю';
-			console.log(arrSubjs[i]);
 			showAdds.append(li);
 		}
 	}
@@ -101,7 +103,6 @@ function countWeek () {
 			
 			let getArr = getRandom(numberHoursSubjs, arr);
 			for (let j=0; j<getArr.length; j++) {
-				//console.log(arrSubjs[i][0]);
 				week[k][getArr[j]] = [arrSubjs[i][0], 1];
 			}
 		}
@@ -135,19 +136,8 @@ function getRandom (number, arr) {
 
 
 function showWeek (arr) {
-	/*if (isSubjsShow == true) {
-		if (confirm ('Пересчитать таблицу?')) {
-			isSubjsShow = false,
-			
-		}
-	}*/
-	
-		//let tr = document.createElement('tr');
-		//tr.innerHTML = '';
 		
 		for (let j=0, k=1; j<arr.length; j++) {
-			
-			
 			elem = "<tr id='test'>";
 			elem += '<th scope="row" class="table-secondary">' + k + '</th>';
 			k++
@@ -156,9 +146,7 @@ function showWeek (arr) {
 				else elem += '<td class="table-success">' + ' ' + '</td></td><td class="table-success">' + ' ' + '</td>\n';
 			}
 			elem += '</tr>';
-			//table.append(tr);
 			table.insertAdjacentHTML('beforeend', elem);
-			
 		}
 		isSubjsShow = true;	
 }
@@ -166,19 +154,18 @@ function showWeek (arr) {
 btnCalcAndShow.addEventListener('click', initWeek);
 
 function startInit () {
-	arrSubjs = JSON.parse( localStorage.arrSubjs);
-	week = JSON.parse( localStorage.week);
-	showSubjs (1);
+	if (arrSubjs.length>0) {
+	arrSubjs = JSON.parse(localStorage.arrSubjs);
+	week = JSON.parse(localStorage.week);
 	showWeek (week);
+	}
+	showSubjs (1);
 	
 }
 
 function locStor () {
-	//localStorage.setItem('test', 1);
-	//alert( localStorage.getItem('test') );
 	localStorage.setItem ('arrSubjs', JSON.stringify (arrSubjs) );
 	localStorage.setItem ('week', JSON.stringify (week) );
-	
 }
 
 function cleanTable (e) {
@@ -190,19 +177,22 @@ function cleanTable (e) {
 	localStorage.clear();
 }
 
-/*
-function cleanSubjs (e) {
-	e.preventDefault();
-	showAdds.innerHTML = '';
+function chamgeNameListSubjs (e) {
+	if (positionNameListSubjs == 'on') {
+		nameListSubjs.innerHTML = '(показать)',
+		positionNameListSubjs = 'off';
+	}
+	else {
+		nameListSubjs.innerHTML = '(скрыть)',
+		positionNameListSubjs = 'on';
+	}	
 }
 
-btnCleanSubjs.addEventListener('click', cleanSubjs);
-*/
+nameListSubjs.addEventListener('click', chamgeNameListSubjs);
 
 btnCleanTable.addEventListener('click', cleanTable);
 
 startInit ();
-
 
 /*Что нужно:
 В конец добавил выполнение initWeek, чтобы при загрузке уже отобразилась неделя
