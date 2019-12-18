@@ -24,6 +24,9 @@ let btnCleanTable = document.querySelector('.clean-table');
 
 let btnCleanSubjs = document.querySelector('.clean-subjs');
 
+let btnCalcAndShow = document.querySelector('.btn_calc_and_show');
+
+
 
 function addSubjs (event) {
 	event.preventDefault();
@@ -66,8 +69,6 @@ function showSubjs (arg) {
 	
 	
 }
-
-let btnCalcAndShow = document.querySelector('.btn_calc_and_show');
 
 function initWeek () {
 	if (isSubjsShow == true) {
@@ -154,10 +155,10 @@ function showWeek (arr) {
 btnCalcAndShow.addEventListener('click', initWeek);
 
 function startInit () {
-	if (arrSubjs.length>0) {
-	arrSubjs = JSON.parse(localStorage.arrSubjs);
-	week = JSON.parse(localStorage.week);
-	showWeek (week);
+	if (localStorage.length>0) {
+		arrSubjs = JSON.parse(localStorage.arrSubjs);
+		week = JSON.parse(localStorage.week);
+		showWeek (week);
 	}
 	showSubjs (1);
 	
